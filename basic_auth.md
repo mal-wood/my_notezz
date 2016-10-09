@@ -67,5 +67,33 @@ end
 ```
 
 **Login** 
+```
+#SESSION LOGIN 
+<h1> Login </h1> 
+	<form action='/sessions' method= "post">
+		<p><input type="text" name="email" placeholder="Email"></p>
+		<p><input type="password" name="password" placeholder="Password"></p>
+		<p><input type="submit" value="Login"></p>
+	</form>
+
+#SESSION CONTROLLERS 
+get '/inspector' do
+  session.inspect
+end
+
+get '/sessions/new' do 
+	erb :'sessions/new'
+end
+
+post '/sessions' do 
+ 	@user = User.authenticate(params[:email], params[:password])
+ 			if @user 
+ 				session[:id] = @user.id
+ 				redirect "/users/#{@user.id}"
+ 			else
+ 			erb :'users/new'
+ 		end
+ end
+```
 
 **Logout** 
