@@ -1,4 +1,4 @@
-Include the following in the user model: 
+**Include the following in the user model: **
 ```
 #require bcrypt at top of file 
 
