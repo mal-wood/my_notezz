@@ -33,17 +33,12 @@ end
 
 **Registration**
 ```
-#in USERS view 
-<h1> Create Account </h1>
-	<form action="/users" method="post">
-		<p><input type="text" name="user[first_name]" placeholder="First Name"></p>
-		<p><input type="text" name="user[last_name]" placeholder="Last Name"></p>
-		<p><input type="text" name="user[email]" placeholder="Email"></p>
-		<p><input type="password" name="user[password]" placeholder="Password"></p>
-		<p><input type="submit" value="Register"></p>
-	</form>
-	
-#in USERS controller
+#BASIC USER ROUTE to display login page 
+get '/users/new' do 
+	erb :'users/new'
+end
+
+#BASIC USER ROUTE to save the USER to the database
 post '/users' do 
 	@user = User.new(params[:user])
 	if @user.save 
@@ -52,6 +47,13 @@ post '/users' do
 		erb :'users/new'
 	end
 end 
+
+get '/users/:id' do  
+	@user = User.find(params[:id])
+	erb :'users/show'
+end
+
+
 ```
 
 **Login** 
