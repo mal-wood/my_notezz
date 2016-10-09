@@ -1,6 +1,6 @@
-**Include the following in the user model:**
+**Include the following in the USER MODEL:**
 ```
-#require bcrypt at top of file 
+#don't forget to require bcrypt at top of file 
 
 require 'bcrypt'
 
@@ -85,6 +85,7 @@ get '/sessions/new' do
 	erb :'sessions/new'
 end
 
+#POST METHOD AFTER USER LOGS IN TO POINT TO THE AUTHENTICATE METHOD
 post '/sessions' do 
  	@user = User.authenticate(params[:email], params[:password])
  			if @user 
@@ -97,3 +98,10 @@ post '/sessions' do
 ```
 
 **Logout** 
+```
+# DELETE THE SESSION ASSOCIATED WITH THE USER AND LOGOUT
+delete '/sessions' do
+  session[:user_id] = nil
+  redirect '/'
+end
+```
