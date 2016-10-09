@@ -2,6 +2,13 @@
 ```
 #require bcrypt at top of file 
 
+require 'bcrypt'
+
+class User < ActiveRecord::Base 
+	validates :first_name, :last_name, :email, presence: true
+	validates :email, uniqueness: true
+  validates :password_hash, presence: true
+   
   include BCrypt
 
   def password 
@@ -13,14 +20,15 @@
     self.password_hash = @password
   end
 
-  def self.authenticate(email, password)
+  def self.authenticate(email, new_password)
      user = User.find_by(email: email)
-     if user.password == password
-       true
+     if user && user.password == new_password
+       return user
      else
-       false
+       nil
      end
    end
+end 
 ```
 
 **Registration**
