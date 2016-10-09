@@ -33,7 +33,17 @@ end
 
 **Registration**
 ```
-#BASIC USER ROUTE to display login page 
+#BASIC REGISTRATION FORM TO CREATE AN ACCOUNT 
+<h1> Create Account </h1>
+	<form action="/users" method="post">
+		<p><input type="text" name="user[first_name]" placeholder="First Name"></p>
+		<p><input type="text" name="user[last_name]" placeholder="Last Name"></p>
+		<p><input type="text" name="user[email]" placeholder="Email"></p>
+		<p><input type="password" name="user[password]" placeholder="Password"></p>
+		<p><input type="submit" value="Register"></p>
+	</form>
+	
+#BASIC USER CONTROLLER ROUTES to display login page 
 get '/users/new' do 
 	erb :'users/new'
 end
